@@ -1,0 +1,14 @@
+{
+  "name": "cracker",
+  "version": "1.0.0",
+  "description": "Testing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Bird",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
