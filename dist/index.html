@@ -7,8 +7,17 @@
         
         <div id="app">
             {{ message }}
+            <span v-if="daa"> HI Visible
+
+                <ul v-for="testing_data in testing">
+                    <li>{{testing_data.hidden_element}}</li>                    
+                </ul>
+            </span>
+            <button v-on:click="getProducts"> NOrmal Button</button>
         </div>
         
         <script src="index.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     </body>
 </html>
