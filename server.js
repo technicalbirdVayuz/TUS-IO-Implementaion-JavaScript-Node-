@@ -120,7 +120,7 @@ app.use(function(req,res,next){
 // app.use('/uploads', uploadApp);
 // app.listen(port, "0.0.0.0");
 
- var upload = require("tus");
+/* var upload = require("tus");
  
 app.use("/files", upload.createServer({
     directory: __dirname + "/uploads",
@@ -130,3 +130,4 @@ app.use("/files", upload.createServer({
         res.send(200);
     }
 }));
+*/
