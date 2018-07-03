@@ -81,3 +81,52 @@ app.get("/fetch",function(req, res) {
 	});
 });
 
+// var upload = require("tus-node-server");
+
+app.use(function(req,res,next){
+        res.setHeader('Access-Control-Allow-Origin', "*");
+       //  res.setHeader('Access-Control-Allow-Origin', "https://qa-app.newgenpayments.com");
+       //  res.setHeader('Access-Control-Allow-Origin', "http://demoapi.newgenpayments.com");
+       //  res.setHeader('Access-Control-Allow-Origin', "https://app.newgenpayments.com");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With, Origin, Content-Type, Accept");
+        res.header("Access-Control-Allow-Methods", "GET, POST, PUT");
+        res.header("Access-Control-Allow-Credentials", true);
+        res.header("X-Frame-Options", "DENY");
+        res.header("accept-encoding", "gzip,deflate");
+        res.header("Content-Security-Policy", "frame-ancestors 'none'");
+        res.header("X-XSS-Protection", "1; mode=block");
+        next();
+ });
+
+// app.use("/files", upload.createServer({
+//     directory: __dirname + "/uploads",
+//     maxFileSize: 1024 * 1024 * 5,
+//     complete: function(req, res, next) {
+//         console.log("File uploaded with the following metadata:", req.upload);
+//         // res.send(200);
+//          res.send({ message: 'Product Created !' })
+//     }
+// }));
+
+// const tus = require('tus-node-server');
+// const server = new tus.Server();
+// server.datastore = new tus.FileStore({
+//     path: '/files'
+// });
+
+// var app = express();
+// const uploadApp = express();
+// uploadApp.all('*', server.handle.bind(server));
+// app.use('/uploads', uploadApp);
+// app.listen(port, "0.0.0.0");
+
+ var upload = require("tus");
+ 
+app.use("/files", upload.createServer({
+    directory: __dirname + "/uploads",
+    maxFileSize: 1024 * 1024 * 5,
+    complete: function(req, res, next) {
+        console.log("File uploaded with the following metadata:", req.upload);
+        res.send(200);
+    }
+}));
