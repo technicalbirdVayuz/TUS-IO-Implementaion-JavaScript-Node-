@@ -2,7 +2,7 @@
   "name": "cracker",
   "version": "1.0.0",
   "description": "Testing",
-  "main": "index.js",
+  "main": "demo.js",
   "scripts": {
     "start": "node server.js"
   },
