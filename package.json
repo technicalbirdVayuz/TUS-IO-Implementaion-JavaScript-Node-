@@ -9,6 +9,7 @@
   "author": "Bird",
   "license": "ISC",
   "dependencies": {
+    "tus": "^0.1.7",
     "axios": "^0.18.0",
     "express": "^4.16.3",
     "mongodb": "^3.1.0",
