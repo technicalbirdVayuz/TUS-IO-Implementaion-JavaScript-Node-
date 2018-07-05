@@ -28,3 +28,15 @@ var ProductSchema = new Schema({
 var Products = mongoose.model('Products', ProductSchema);
 module.exports = Products;
 
+var Login = new Schema({
+    user_id: String,
+    useer_name: String,
+    user_email: String,
+    user_password: String,
+    user_role: String,
+    is_active: Number,
+    created_at: Date
+});
+var Users = mongoose.model('ic_users', Login);
+module.exports = Users;
+
