@@ -1,11 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+</head>
+
+<!--   <div id="app">
+    <v-app>
+      <v-content>
+        <v-container>{{msg}}</v-container>
+      </v-content>
+    </v-app>
+  </div> -->
+
+
+<!-- demo root element -->
+<style type="text/css">
+  body {
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-size: 14px;
+  color: #444;
+}
+
+table {
+  border: 2px solid #42b983;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+th {
+  background-color: #42b983;
+  color: rgba(255, 255, 255, 0.66);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+th,
+td {
+  min-width: 100%;
+  padding: 10px 20px;
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #fff;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
 <!-- Overlay for fixed sidebar -->
 <head>
     <link rel="stylesheet" href="companies.css">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen">
 
   </head>
-
-
+ 
+<script type="text/javascript" src="https://unpkg.com/v-data-table/dist/v-data-table.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<body>
   <div class="header">
   <a href="#" id="menu-action">
     <i class="fa fa-bars"></i>
@@ -17,65 +108,95 @@
 </div>
 <div class="sidebar">
   <ul>
-    <li><a href="#"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
-    <li><a href="#"><i class="fa fa-server"></i><span>Server</span></a></li>
-    <li><a href="#"><i class="fa fa-calendar"></i><span>Calendar</span></a></li>
-    <li><a href="#"><i class="fa fa-envelope-o"></i><span>Messages</span></a></li>
-    <li><a href="#"><i class="fa fa-table"></i><span>Data Table</span></a></li>
+    <li><a href="#"><i class="fa fa-desktop"></i><span>Companies</span></a></li>
+    <li><a href="#"><i class="fa fa-desktop"></i><span>Companies Type</span></a></li>
+    <li><a href="#"><i class="fa fa-server"></i><span>Locations</span></a></li>
+    <li><a href="#"><i class="fa fa-calendar"></i><span>Salaries</span></a></li>
+    <li><a href="#"><i class="fa fa-envelope-o"></i><span>Experience</span></a></li>
+    <li><a href="#"><i class="fa fa-table"></i><span>Job Prefrences</span></a></li>
   </ul>
 </div>
 
 <!-- Content -->
 <div class="main">
   <div class="hipsum">
-    <div class="jumbotron">
-      <h1 id="hello,-world!">Hello, world!<a class="anchorjs-link" href="#hello,-world!"><span class="anchorjs-icon"></span></a></h1>
-      <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-      <p><a class="btn btn-primary" href="#" role="button">Learn more</a></p>
-    </div>
-    <p>Keffiyeh banjo keytar selfies. Actually plaid PBR&amp;B, High Life dreamcatcher kale chips master cleanse craft beer messenger bag locavore Brooklyn Blue Bottle. Freegan literally brunch kale chips small batch. Etsy iPhone gentrify photo booth. Lomo
-      keffiyeh vinyl, distillery pop-up messenger bag kale chips post-ironic DIY 90's keytar. Intelligentsia next level Pitchfork forage vinyl Marfa, normcore heirloom. Drinking vinegar asymmetrical roof party, yr artisan Carles mixtape jean shorts.</p>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
-    <p>Slow-carb fanny pack yr Brooklyn gentrify. Fanny pack keffiyeh taxidermy, ugh viral polaroid craft beer. +1 distillery Truffaut typewriter tousled crucifix, lo-fi butcher normcore skateboard. Drinking vinegar ugh whatever sriracha. Synth tofu viral
-      butcher flexitarian. 3 wolf moon Schlitz plaid small batch kale chips blog. Fingerstache selfies freegan, Helvetica Neutra Brooklyn semiotics cred narwhal beard tousled leggings.</p>
-    <div class="row">
-      <div class="col-sm-6">
-        <p>Slow-carb fanny pack yr Brooklyn gentrify. Fanny pack keffiyeh taxidermy, ugh viral polaroid craft beer. +1 distillery Truffaut typewriter tousled crucifix, lo-fi butcher normcore skateboard. Drinking vinegar ugh whatever sriracha. Synth tofu
-          viral butcher flexitarian. 3 wolf moon Schlitz plaid small batch kale chips blog. Fingerstache selfies freegan, Helvetica Neutra Brooklyn semiotics cred narwhal beard tousled leggings.</p>
-      </div>
-      <div class="col-sm-6">
-        <p>Slow-carb fanny pack yr Brooklyn gentrify. Fanny pack keffiyeh taxidermy, ugh viral polaroid craft beer. +1 distillery Truffaut typewriter tousled crucifix, lo-fi butcher normcore skateboard. Drinking vinegar ugh whatever sriracha. Synth tofu
-          viral butcher flexitarian. 3 wolf moon Schlitz plaid small batch kale chips blog. Fingerstache selfies freegan, Helvetica Neutra Brooklyn semiotics cred narwhal beard tousled leggings.</p>
-      </div>
-    </div>
+
+<div id="demo">
+ 
+  <br/>
+  <br/>
+  <form id="search">
+    Search
+    <input name="query" v-model="searchQuery" type="text" style="border: 1px #000 !important">
+  </form>
+  <button class="pull-right" @click="add_companies()"> Add Comapnies</button>
+  <data-table :data="gridData" :columns-to-display="gridColumns" :filter-key="searchQuery" :display-names="displayNames" :child-hideable="true" :child-init-hide="true" style="width: 100%" :columns-to-not-sort="['action']">
+    <template slot="child" scope="props">
+      This is my child row: {{props.entry.name}}
+    </template>
+    <template slot="name" scope="props">
+      <b>{{props.entry.name}}</b>
+      <br />
+    </template>
+    <template slot="is_active" scope="props">
+      <!-- <button @click="showPower(props.entry.power)" > -->
+      <button @click="showPower(props.entry.company_name)" >
+        Show Power
+      </button>
+    </template>
+  </data-table>
+
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script>
+    // new Vue({ el: '#app',
+    //         data:{
+    //           msg: "Hello Brother"
+    //         } })
+  
+   Vue.use(DataTable)
+
+var demo = new Vue({
+  el: '#demo',
+  data: {
+    searchQuery: '',
+    gridColumns: ['company_name', 'company_contact_email', 'company_description', 'is_active'],
+    displayNames: {
+      'power': 'Company Name'
+    },
+    gridData: []
+  },
+  methods: {
+    showPower(e) {
+    console.log(e);
+    },
+    add_companies(){
+      location.href = "/add_companies/add_companies.html";
+    }
+  },
+      mounted() {
+        // alert("mounter");
+    axios.get(`http://localhost:3000/fetch_all_companies`)
+    .then(response => {
+      console.log(response.data);
+      for(var i = 0;i<response.data.length;i++){
+        this.gridData.push({
+          'company_name':response.data[i].company_name, 
+          'company_contact_email':response.data[i].company_contact_email,
+           'company_description': response.data[i].company_description, 
+          'is_active':response.data[i].is_active
+        });
+      }
+    })
+    .catch(e => {
+      alert("Un Solved");
+      this.errors.push(e)
+    })
+        },
+})
+  </script>
+</body>
   </div>
 </div>

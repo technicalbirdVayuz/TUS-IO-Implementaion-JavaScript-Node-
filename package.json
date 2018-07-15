@@ -9,11 +9,22 @@
   "author": "Bird",
   "license": "ISC",
   "dependencies": {
-    "tus": "^0.1.7",
     "axios": "^0.18.0",
     "express": "^4.16.3",
+    "fs": "0.0.1-security",
     "mongodb": "^3.1.0",
-    "mongoose": "^5.1.7"
+    "mongoose": "^5.1.7",
+    "tus-node-server": "^0.2.11",
+    "v-data-table": "^2.1.0",
+    "vuetify": "^1.1.1",
+    "@google-cloud/storage": "1.1.1",
+    "aws-sdk": "^2.224.1",
+    "configstore": "^3.1.2",
+    "crypto-rand": "0.0.2",
+    "debug": "^3.1.0",
+    "google-auto-auth": "^0.8.2",
+    "object-assign": "^4.1.1",
+    "request": "^2.85.0"
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
@@ -22,6 +33,17 @@
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.15.1"
+    "webpack": "^4.15.1",
+    "@vimeo/eslint-config-player": "^4.0.1",
+    "babel-eslint": "^6.0.4",
+    "coveralls": "^2.11.4",
+    "eslint": "^2.9.0",
+    "eslint-plugin-promise": "^1.1.0",
+    "istanbul": "^0.4.0",
+    "mocha": "^2.3.3",
+    "nyc": "^11.6.0",
+    "should": "^8.0.1",
+    "supertest": "^1.1.0",
+    "tus-js-client": "^1.5.1"
   }
 }

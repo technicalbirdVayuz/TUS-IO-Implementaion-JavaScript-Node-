@@ -7,14 +7,101 @@ const assert = require('assert');
 var bodyParser = require('body-parser');
 var Products = require('./database.js');
 var Users = require('./database.js');
+var Companies  = require('./database.js');
 
 
 app = express();
 app.use(serveStatic(__dirname + "/dist"));
 var port = process.env.PORT || 3000;
+var host = "0.0.0.0";
 app.listen(port);
 console.log('server started '+ port);
 
+const fs = require('fs');
+
+const Server = require('./index').Server;
+const FileStore = require('./index').FileStore;
+const GCSDataStore = require('./index').GCSDataStore;
+const S3Store = require('./index').S3Store;
+const EVENTS = require('./index').EVENTS;
+
+const server = new Server();
+ const fileNameFromUrl = (req) => {
+
+    return req.url.replace(/\//g, '-');
+}
+server.datastore = new FileStore({
+            path: '/files'
+});
+
+/**
+ * Basic GET handler to serve the demo html/js
+ *
+ * @param  {object} req http.incomingMessage
+ * @param  {object} res http.ServerResponse
+ */
+
+
+const writeFile = (req, res) => {
+    console.log("req");
+    console.log("req");
+    console.log("req");
+    console.log("req");
+    console.log(req);
+    const filename = req.url === '/' ? 'demo/index.html' : req.url;
+    const filepath = path.join(process.cwd(), filename);
+    fs.readFile(filepath, 'binary', (err, file) => {
+        if (err) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.write(err);
+            res.end();
+            return;
+        }
+
+        res.writeHead(200);
+        res.write(file);
+         res.status(200).send({"msg":"success","user_id":"Ank"});
+        res.end();
+    });
+};
+
+// Define routes to serve the demo html/js files.
+// server.get('/', writeFile);
+// server.get('/demo/index.js', writeFile);
+// server.get('/node_modules/tus-js-client/dist/tus.js', writeFile);
+
+/*server.on(EVENTS.EVENT_FILE_CREATED, (event) => {
+    console.log(`Upload file created for file`);
+    console.log(event.file);
+});*/
+
+server.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
+    console.log(event.file);
+    console.log(`[${new Date().toLocaleTimeString()}] [EVENT HOOK] Upload complete for file ${event.file.id}`);
+});
+
+server.get('/uploads', (req, res) => {
+  console.log("req");
+    const files_path = path.join(process.cwd(), server.datastore.path);
+    fs.readdir(files_path, (err, filenames) => {
+        const files = filenames.map((filename) => {
+            return {
+                name: filename,
+                url: `http://${host}:${port}/${filename}`,
+            };
+        });
+
+        res.writeHead(200);
+            res.status(200).send({"msg":"success","user_id":"Ank"});
+          res.write(JSON.stringify({ files }));
+        res.end();
+    });
+});
+
+port = 8000;
+server.listen({ host, port }, () => {
+    console.log(`[${new Date().toLocaleTimeString()}] tus server listening at http://${host}:${port} `);
+});
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -32,6 +119,31 @@ app.get('/login', function (req, res) {
 app.get('/companies', function (req, res) {
     res.sendFile(__dirname + '/dist/companies/companies.html')
 })
+app.get('/add_companies', function (req, res) {
+    res.sendFile(__dirname + '/dist/add_companies/add_companies.html')
+})
+
+/*
+const tus = require('tus-node-server');
+
+const server = new tus.Server();
+server.datastore = new tus.FileStore({
+    path: '/files'
+});
+
+const Server = require('tus-node-server').Server;
+const EVENTS = require('tus-node-server').EVENTS;
+
+const server = new Server();
+server.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
+    console.log(`Upload complete for file ${event.file.id}`);
+});*/
+
+// const host = '0.0.0.0';
+// const port = 8000;
+// server.listen({ host, port }, () => {
+    // console.log(`[${new Date().toLocaleTimeString()}] tus server listening at http://${host}:${port}`);
+// });
 
 
 app.use(function(req,res,next){
@@ -81,6 +193,16 @@ app.post("/check_login_crendentials",function(data,res){
 
 app.get("/fetch",function(req, res) {
   Products.find((err, product) => {  
+    // Note that this error doesn't mean nothing was found,
+    // it means the database had an error while searching, hence the 500 status
+    if (err) return res.status(500).send(err)
+    // send the list of all people
+    return res.status(200).send(product);
+  });
+});
+
+app.get("/fetch_all_companies",function(req, res) {
+  Companies.find({},(err, product) => {  
     // Note that this error doesn't mean nothing was found,
     // it means the database had an error while searching, hence the 500 status
     if (err) return res.status(500).send(err)

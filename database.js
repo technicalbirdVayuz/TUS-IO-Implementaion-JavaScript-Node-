@@ -40,3 +40,32 @@ var Login = new Schema({
 var Users = mongoose.model('ic_users', Login);
 module.exports = Users;
 
+
+var Companies = new Schema({
+    company_id: String,
+    company_name: String,
+    company_contact_email: String,
+    company_description: String,
+    website: String,
+    is_active: Number,
+    created_at: Date
+});
+var Companies = mongoose.model('ic_companies',Companies);
+module.exports = Companies;
+
+/*
+var CompanyDetails= new Schema({
+    details_id: String,
+    website: String,
+    location:String,
+    headquaters: String,
+    founded_year: String,
+    type: String,
+    company_size: String,
+    speciality: String,
+    created_at: Date
+});
+var Users = mongoose.model('ic_users', Login);
+module.exports = Users;
+
+*/
