@@ -12,7 +12,7 @@ var Companies  = require('./database.js');
 
 app = express();
 app.use(serveStatic(__dirname + "/dist"));
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3333;
 var host = "0.0.0.0";
 app.listen(port);
 console.log('server started '+ port);
