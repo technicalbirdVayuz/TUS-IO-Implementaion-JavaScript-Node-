@@ -113,6 +113,27 @@ app.use(bodyParser.json({
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/dist/index.html')
 })
+app.get('/files/*',function(request,response){
+
+
+const filePath =  __dirname + request.url; // or any file format
+  // console.log(__dirname + filePath);
+  // Check if file specified by the filePath exists 
+  fs.exists(filePath, function(exists){
+      if (exists) {     
+        // Content-type is very interesting part that guarantee that
+        // Web browser will handle response in an appropriate manner.
+        response.writeHead(200, {
+          "Content-Type": "application/octet-stream",
+          "Content-Disposition": "attachment; filename=" + request.url
+        });
+        fs.createReadStream(filePath).pipe(response);
+      } else {
+        response.writeHead(400, {"Content-Type": "text/plain"});
+        response.end("ERROR File does not exist");
+      }
+    });
+})
 app.get('/login', function (req, res) {
     res.sendFile(__dirname + '/dist/login/login.html')
 })

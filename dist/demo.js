@@ -230,8 +230,11 @@ inputEl.addEventListener('change', function(e) {
         },
         onSuccess: function(data) {
             // console.log(data);
+
               var anchor = document.createElement("a");
-      anchor.textContent = "Download " +upload.url + upload.file.name + " (" + upload.file.size + " bytes)";
+      anchor.textContent = "Download " +upload.url + upload.file.name + " (" + upload.file.id + " bytes)";
+      console.log("Download " +upload.url + upload.file.name + " (" + upload.file.id + " bytes)");
+      // alert("Download " +upload.url + upload.file.name + " (" + upload.file.id + " bytes)");
       anchor.href = upload.url;
       anchor.className = "btn btn-success";
       uploadList.appendChild(anchor);
